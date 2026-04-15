@@ -46,11 +46,11 @@ Only the \*\*Users endpoint\*\* was tested, as required in the assessment.
 
 
 
-**\# Observations
-**
+**\# Observations**
+
 \- The Swagger Petstore Users endpoint supports basic user creation, retrieval, update, login, logout, and delete operations
 
-\- Both positive and negative scenarios can be validated through Postman tests
+\- Both positive and negative scenarios is been validated through Postman tests
 
 
 
