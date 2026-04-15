@@ -1,0 +1,646 @@
+{
+  "info": {
+    "_postman_id": "b78e2881-518b-4188-b8e1-8c95931eceae",
+    "name": "User API Tests",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "42407873",
+    "_collection_link": "https://go.postman.co/collection/42407873-b78e2881-518b-4188-b8e1-8c95931eceae?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Create User",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Response time is below 3000ms\", function () {\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(3000);\r",
+              "});\r",
+              "\r",
+              "let res = pm.response.json();\r",
+              "\r",
+              "pm.test(\"Response contains code, type and message\", function () {\r",
+              "    pm.expect(res).to.have.property(\"code\");\r",
+              "    pm.expect(res).to.have.property(\"type\");\r",
+              "    pm.expect(res).to.have.property(\"message\");\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Response message is present\", function () {\r",
+              "    pm.expect(res.message).to.not.be.empty;\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"id\": 101,\r\n  \"username\": \"{{username}}\",\r\n  \"firstName\": \"Nature\",\r\n  \"lastName\": \"Godwin\",\r\n  \"email\": \"godwinnature22@gmail.com\",\r\n  \"password\": \"{{password}}\",\r\n  \"phone\": \"07039864572\",\r\n  \"userStatus\": 1\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/user",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "user"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Created User",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Response time is below 3000ms\", function () {\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(3000);\r",
+              "});\r",
+              "\r",
+              "let res = pm.response.json();\r",
+              "\r",
+              "pm.test(\"Returned user has expected username\", function () {\r",
+              "    pm.expect(res.username).to.eql(pm.environment.get(\"username\"));\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Returned user contains required fields\", function () {\r",
+              "    pm.expect(res).to.have.property(\"id\");\r",
+              "    pm.expect(res).to.have.property(\"username\");\r",
+              "    pm.expect(res).to.have.property(\"firstName\");\r",
+              "    pm.expect(res).to.have.property(\"lastName\");\r",
+              "    pm.expect(res).to.have.property(\"email\");\r",
+              "    pm.expect(res).to.have.property(\"password\");\r",
+              "    pm.expect(res).to.have.property(\"phone\");\r",
+              "    pm.expect(res).to.have.property(\"userStatus\");\r",
+              "});\r",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/user/{{username}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "user",
+            "{{username}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update User",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "let res = pm.response.json();\r",
+              "\r",
+              "pm.test(\"Update response contains message\", function () {\r",
+              "    pm.expect(res).to.have.property(\"message\");\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"id\": 101,\r\n  \"username\": \"{{username}}\",\r\n  \"firstName\": \"{{updatedFirstName}}\",\r\n  \"lastName\": \"Godwin\",\r\n  \"email\": \"natureupdated@test.com\",\r\n  \"password\": \"{{password}}\",\r\n  \"phone\": \"08111111111\",\r\n  \"userStatus\": 1\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/user/{{username}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "user",
+            "{{username}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Login User",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Response time is below 3000ms\", function () {\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(3000);\r",
+              "});\r",
+              "\r",
+              "let responseText = pm.response.text();\r",
+              "\r",
+              "pm.test(\"Login response is not empty\", function () {\r",
+              "    pm.expect(responseText).to.not.be.empty;\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/user/login?username={{username}}&password={{password}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "user",
+            "login"
+          ],
+          "query": [
+            {
+              "key": "username",
+              "value": "{{username}}"
+            },
+            {
+              "key": "password",
+              "value": "{{password}}"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Logout User",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Logout response is returned\", function () {\r",
+              "    pm.expect(pm.response.text()).to.not.be.empty;\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/user/logout",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "user",
+            "logout"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete User",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "let res = pm.response.json();\r",
+              "\r",
+              "pm.test(\"Delete response contains message\", function () {\r",
+              "    pm.expect(res).to.have.property(\"message\");\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/user/{{username}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "user",
+            "{{username}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Verify User Deleted",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 404 after deletion\", function () {\r",
+              "    pm.response.to.have.status(404);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Error response is returned\", function () {\r",
+              "    pm.expect(pm.response.text()).to.not.be.empty;\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/user/{{username}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "user",
+            "{{username}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Users With Array",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Bulk create with array response is returned\", function () {\r",
+              "    pm.expect(pm.response.text()).to.not.be.empty;\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "[\r\n  {\r\n    \"id\": 201,\r\n    \"username\": \"Trinity\",\r\n    \"firstName\": \"Divine\",\r\n    \"lastName\": \"GodwinOne\",\r\n    \"email\": \"array1@test.com\",\r\n    \"password\": \"pass123\",\r\n    \"phone\": \"08011111111\",\r\n    \"userStatus\": 1\r\n  },\r\n  {\r\n    \"id\": 202,\r\n    \"username\": \"Gabriel\",\r\n    \"firstName\": \"Angel\",\r\n    \"lastName\": \"Godwin\",\r\n    \"email\": \"array2@test.com\",\r\n    \"password\": \"pass123\",\r\n    \"phone\": \"08022222222\",\r\n    \"userStatus\": 1\r\n  }\r\n]",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/user/createWithArray",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "user",
+            "createWithArray"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Users With List",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Bulk create with list response is returned\", function () {\r",
+              "    pm.expect(pm.response.text()).to.not.be.empty;\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "[\r\n  {\r\n    \"id\": 301,\r\n    \"username\": \"list_user_1\",\r\n    \"firstName\": \"List\",\r\n    \"lastName\": \"One\",\r\n    \"email\": \"list1@test.com\",\r\n    \"password\": \"pass123\",\r\n    \"phone\": \"08033333333\",\r\n    \"userStatus\": 1\r\n  },\r\n  {\r\n    \"id\": 302,\r\n    \"username\": \"list_user_2\",\r\n    \"firstName\": \"List\",\r\n    \"lastName\": \"Two\",\r\n    \"email\": \"list2@test.com\",\r\n    \"password\": \"pass123\",\r\n    \"phone\": \"08044444444\",\r\n    \"userStatus\": 1\r\n  }\r\n]",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/user/createWithList",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "user",
+            "createWithList"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Non-Existing User",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 404 for non-existing user\", function () {\r",
+              "    pm.response.to.have.status(404);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Error response is returned\", function () {\r",
+              "    pm.expect(pm.response.text()).to.not.be.empty;\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/user/{{nonExistingUser}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "user",
+            "{{nonExistingUser}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Login With Wrong Password",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Response is received\", function () {\r",
+              "    pm.expect(pm.response.code).to.be.oneOf([200, 400]);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Response body is not empty\", function () {\r",
+              "    pm.expect(pm.response.text()).to.not.be.empty;\r",
+              "});\r",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/user/login?username={{username}}&password=wrongpassword",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "user",
+            "login"
+          ],
+          "query": [
+            {
+              "key": "username",
+              "value": "{{username}}"
+            },
+            {
+              "key": "password",
+              "value": "wrongpassword"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create User with missing required fields",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Response is received\", function () {\r",
+              "    pm.expect(pm.response.code).to.be.oneOf([200, 400, 422, 405]);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Response body is not empty\", function () {\r",
+              "    pm.expect(pm.response.text()).to.not.be.empty;\r",
+              "});\r",
+              "\r",
+              "pm.test(\"If API accepts incomplete payload, record as observation\", function () {\r",
+              "    pm.expect(pm.response.text()).to.be.a(\"string\");\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"id\": 102,\r\n  \"firstName\": \"Nature\",\r\n  \"lastName\": \"Godwin\",\r\n  \"email\": \"missingusername@test.com\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/user",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "user"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete non-existing user",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Response is received\", function () {\r",
+              "    pm.expect(pm.response.code).to.be.oneOf([200, 404]);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Response body is not empty\", function () {\r",
+              "    pm.expect(pm.response.text()).to.not.be.empty;\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Response can be parsed if JSON\", function () {\r",
+              "    try {\r",
+              "        let res = pm.response.json();\r",
+              "        pm.expect(res).to.exist;\r",
+              "    } catch (e) {\r",
+              "        pm.expect(pm.response.text()).to.be.a(\"string\");\r",
+              "    }\r",
+              "});\r",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/user/{{nonExistingUser}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "user",
+            "{{nonExistingUser}}"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
