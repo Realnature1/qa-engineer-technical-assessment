@@ -6,7 +6,7 @@ This folder contains the Postman files used to test the Swagger Petstore Users e
 
 
 
-\## Files
+\# Files
 
 \- `User API Tests.postman\_collection.json`
 
@@ -14,13 +14,13 @@ This folder contains the Postman files used to test the Swagger Petstore Users e
 
 
 
-\## Scope
+\# Scope
 
 Only the \*\*Users endpoint\*\* was tested, as required in the assessment.
 
 
 
-\## Prerequisites
+\# Prerequisites
 
 \- Postman installed
 
@@ -32,7 +32,7 @@ Only the \*\*Users endpoint\*\* was tested, as required in the assessment.
 
 
 
-\## How to Run
+\# How to Run
 
 1\. Open Postman
 
@@ -46,7 +46,7 @@ Only the \*\*Users endpoint\*\* was tested, as required in the assessment.
 
 
 
-\## Observations
+\# Observations
 
 \- The Swagger Petstore Users endpoint supports basic user creation, retrieval, update, login, logout, and delete operations
 
@@ -54,7 +54,7 @@ Only the \*\*Users endpoint\*\* was tested, as required in the assessment.
 
 
 
-\## Blockers
+\# Blockers
 
 \- No major blocker prevented execution
 
@@ -62,7 +62,7 @@ Only the \*\*Users endpoint\*\* was tested, as required in the assessment.
 
 
 
-\## Notes
+\# Notes
 
 \- Only the Users endpoint was tested, in line with the assessment instruction
 
