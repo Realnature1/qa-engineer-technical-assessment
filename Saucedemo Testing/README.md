@@ -29,6 +29,14 @@ The automation scope was prioritized around the main user path through the appli
 
 This approach was chosen to ensure coverage of the most critical user-facing flows while also including negative validation coverage.
 
+## How To Execute 
+
+1. Navigate to the ui-automation folder
+2. Install dependencies:
+3. npm install
+4. Run Cypress in interactive mode: npx cypress open
+6. Or run tests in headless mode: npx cypress run
+
 ## Tools Used
 - **Cypress**
 - **JavaScript**
